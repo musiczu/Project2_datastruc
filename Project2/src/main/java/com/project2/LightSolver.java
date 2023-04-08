@@ -16,7 +16,7 @@ public class LightSolver {
     private PuzzleState startState;
     private PuzzleState endState;
     private String kawinsolution;
-    private String initi al;
+    private String initial;
 
     public LightSolver(String input, int board_size) {
 
