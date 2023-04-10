@@ -50,14 +50,47 @@ public class Project2 {
                     System.out.println(e);
                 }
             }
-            LightSolver_String LS = new LightSolver_String(initial, size_number);
-            LS.printSolution(LS.Solve());
-
-            /*LightSolver LS = new LightSolver( initial, size_number); //roonpee's code
-        if (LS.getstartState().hashCode() == -1)
-        {
-            System.out.println("Can't find solution ");
-        }*/
+            Game GM = new Game(initial, size_number);
+            
+            boolean checkbrokeninput = false;
+            while (!checkbrokeninput) {
+                try {
+                    System.out.printf("\nSet broken light (Y/N) ?\n");
+                    String Y_N = scan.nextLine();
+                    if (Y_N.equals("Y") || Y_N.equals("y")) {
+                        int rowbroke = 0, colbroke = 0;
+                        System.out.printf("Enter row of broken light (0 - %d) = \n", size_number - 1);
+                        boolean checkrow = false;
+                        while (!checkrow) {
+                            rowbroke = Integer.parseInt(scan.nextLine());
+                            if (rowbroke < 0 || rowbroke > size_number - 1) {
+                                System.out.printf("Please insert (0 - %d) = \n", size_number - 1);
+                            } else {
+                                checkrow = true;
+                            }
+                        }
+                        System.out.printf("Enter col of broken light (0 - %d) = \n", size_number - 1);
+                        boolean checkcol = false;
+                        while (!checkcol) {
+                            colbroke = Integer.parseInt(scan.nextLine());
+                            if (colbroke < 0 || colbroke > size_number - 1) {
+                                System.out.printf("Please insert (0 - %d) = \n", size_number - 1);
+                            } else {
+                                checkcol = true;
+                            }
+                        }
+                        GM.addbroken(rowbroke, colbroke);
+                        checkbrokeninput = true;
+                    } else if (Y_N.equals("N") || Y_N.equals("n")) {
+                        checkbrokeninput = true;
+                    } else {
+                        System.out.println("Input (Y/N)");
+                    }
+                } catch (StringIndexOutOfBoundsException e) {
+                    System.out.println(e);
+                }
+            }
+            GM.Start();
             repeat = false;
         }
     }
