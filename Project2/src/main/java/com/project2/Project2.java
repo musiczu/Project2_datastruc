@@ -31,67 +31,97 @@ public class Project2 {
             }
 
             boolean checkinitialinput = false;
+            System.out.printf("Enter initial states (%d bits, left to right, line by line) = \n", size_number * size_number);
             while (!checkinitialinput) {
                 try {
-                    System.out.printf("Enter initial states (%d bits, left to right, line by line) = \n",
-                            size_number * size_number);
                     initial = scan.nextLine();
-
-                    for (int i = 0; i < initial.length(); i++) {
-                        if (initial.charAt(i) != '0' && initial.charAt(i) != '1') {
+                    if (initial.length() != size_number * size_number) {
+                        System.out.println("Invalid initial state input !!");
+                        System.out.printf("Please insert %d bits\n", size_number * size_number);
+                        checkinitialinput = false;
+                    } else {
+                        boolean checkinitial = true;
+                        for (int i = 0; i < initial.length(); i++) {
+                            if (initial.charAt(i) != '0' && initial.charAt(i) != '1') {
+                                checkinitial = false;
+                            }
+                        }
+                        if (checkinitial) {
+                            checkinitialinput = true;
+                        } else {
                             System.out.println("Invalid initial state input !!");
                             System.out.println("Please insert only 0 or 1");
-
                             checkinitialinput = false;
                         }
                     }
-                    checkinitialinput = true;
                 } catch (StringIndexOutOfBoundsException e) {
                     System.out.println(e);
                 }
             }
             Game GM = new Game(initial, size_number);
-            
+            System.out.println("\n**************************************************************");
+
             boolean checkbrokeninput = false;
+            System.out.printf("\nSet broken light (Y/N) ?\n");
             while (!checkbrokeninput) {
                 try {
-                    System.out.printf("\nSet broken light (Y/N) ?\n");
                     String Y_N = scan.nextLine();
-                    if (Y_N.equals("Y") || Y_N.equals("y")) {
-                        int rowbroke = 0, colbroke = 0;
-                        System.out.printf("Enter row of broken light (0 - %d) = \n", size_number - 1);
-                        boolean checkrow = false;
-                        while (!checkrow) {
-                            rowbroke = Integer.parseInt(scan.nextLine());
-                            if (rowbroke < 0 || rowbroke > size_number - 1) {
-                                System.out.printf("Please insert (0 - %d) = \n", size_number - 1);
-                            } else {
-                                checkrow = true;
-                            }
-                        }
-                        System.out.printf("Enter col of broken light (0 - %d) = \n", size_number - 1);
-                        boolean checkcol = false;
-                        while (!checkcol) {
-                            colbroke = Integer.parseInt(scan.nextLine());
-                            if (colbroke < 0 || colbroke > size_number - 1) {
-                                System.out.printf("Please insert (0 - %d) = \n", size_number - 1);
-                            } else {
-                                checkcol = true;
-                            }
-                        }
-                        GM.addbroken(rowbroke, colbroke);
-                        checkbrokeninput = true;
-                    } else if (Y_N.equals("N") || Y_N.equals("n")) {
-                        checkbrokeninput = true;
-                    } else {
-                        System.out.println("Input (Y/N)");
+                    switch (Y_N) {
+                        case "Y":
+                        case "y":
+                            int rowbroke = 0, colbroke = 0;
+                            System.out.printf("Enter row of broken light (0 - %d) = \n", size_number - 1);
+                            boolean checkrow = false;
+                            while (!checkrow) {
+                                rowbroke = Integer.parseInt(scan.nextLine());
+                                if (rowbroke < 0 || rowbroke > size_number - 1) {
+                                    System.out.printf("Please insert (0 - %d) = \n", size_number - 1);
+                                } else {
+                                    checkrow = true;
+                                }
+                            }   System.out.printf("Enter col of broken light (0 - %d) = \n", size_number - 1);
+                            boolean checkcol = false;
+                            while (!checkcol) {
+                                colbroke = Integer.parseInt(scan.nextLine());
+                                if (colbroke < 0 || colbroke > size_number - 1) {
+                                    System.out.printf("Please insert (0 - %d) = \n", size_number - 1);
+                                } else {
+                                    checkcol = true;
+                                }
+                            }   GM.addbroken(rowbroke, colbroke);
+                            checkbrokeninput = true;
+                            break;
+                        case "N":
+                        case "n":
+                            checkbrokeninput = true;
+                            break;
+                        default:
+                            System.out.println("Input (Y/N)");
+                            break;
                     }
                 } catch (StringIndexOutOfBoundsException e) {
                     System.out.println(e);
                 }
             }
+            System.out.println("\n**************************************************************");
+
             GM.Start();
-            repeat = false;
+
+            System.out.printf("\nPlay again (Y/N) ?\n");
+            boolean checkrepeatinput = false;
+            while (!checkrepeatinput) {
+                String Y_N = scan.nextLine();
+                if (Y_N.equals("Y") || Y_N.equals("y")) {
+                    repeat = true;
+                    checkrepeatinput = true;
+                } else if (Y_N.equals("N") || Y_N.equals("n")) {
+                    repeat = false;
+                    checkrepeatinput = true;
+                } else {
+                    System.out.println("Input (Y/N)");
+                }
+            }
+            System.out.println("\n**************************************************************");
         }
     }
 }

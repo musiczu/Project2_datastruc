@@ -68,11 +68,12 @@ public class Game {
             showsol(sol);
         }
     }
-    
-    public void addbroken(int row, int col){
+
+    public void addbroken(int row, int col) {
         int po = row * N + col;
         initial.setbroken(po);
         finish.setbroken(po);
+        printBoard(initial);
     }
 
     public void showsol(List sol) {
@@ -84,14 +85,31 @@ public class Game {
             int po = solution.get(i + 1).getpo(solution.get(i));
             int row = po / N;
             int col = po % N;
-            System.out.printf("\n>>> Move %d : turn %-3s row %d, col %d\n", i+1, tog, row, col);
+            System.out.printf("\n>>> Move %d : turn %-3s row %d, col %d\n", i + 1, tog, row, col);
             printBoard(solution.get(i + 1));
         }
     }
 
     public void printBoard(Light L) {
         String temp = L.getpresent();
-        System.out.printf("       ");
+        System.out.printf("States in bits = ");
+        for (int i = 0; i < allnum; i++) {
+            switch (temp.charAt(i)) {
+                case '0':
+                    System.out.printf("0");
+                    break;
+                case '1':
+                    System.out.printf("1");
+                    break;
+                case '2':
+                    System.out.printf("0");
+                    break;
+                case '3':
+                    System.out.printf("1");
+                    break;
+            }
+        }
+        System.out.printf("\n       ");
         for (int i = 0; i < N; i++) {
             System.out.printf("| col%2d ", i);
         }
@@ -99,11 +117,19 @@ public class Game {
         for (int i = 0; i < N; i++) {
             System.out.printf(" row%2d ", i);
             for (int j = 0; j < N; j++) {
-                switch (temp.charAt((N * i) + j)){
-                    case '0' : System.out.printf("|   %-2s  ", "0"); break;
-                    case '1' : System.out.printf("|   %-2s  ", "1"); break;
-                    case '2' : System.out.printf("|   %-2s  ", "0x"); break;
-                    case '3' : System.out.printf("|   %-2s  ", "1x"); break;
+                switch (temp.charAt((N * i) + j)) {
+                    case '0':
+                        System.out.printf("|   %-2s  ", "0");
+                        break;
+                    case '1':
+                        System.out.printf("|   %-2s  ", "1");
+                        break;
+                    case '2':
+                        System.out.printf("|   %-2s  ", "0x");
+                        break;
+                    case '3':
+                        System.out.printf("|   %-2s  ", "1x");
+                        break;
                 }
             }
             System.out.println();
