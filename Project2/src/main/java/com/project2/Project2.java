@@ -11,7 +11,7 @@ public class Project2 {
         String initial = "";
         while (repeat) {
             boolean error = true;
-            while (error) // error or not ?
+            while (error) // error or not ?  C:\second year 2 semester\EGCO221\Project2\Project2\src\main\java\com\project2\Project2.java
             {
                 try {
                     System.out.println("Enter number of rows square grid = "); // size of grid

@@ -47,7 +47,7 @@ public class Game {
                 boolean have = false;
                 for (Light vertex : G.vertexSet()) {
                     if (vertex.getpresent().equals(newstate)) {
-                        temp.setprevious(newstate, j);
+                        vertex.setprevious(temp.getpresent(), j);
                         G.addEdge(temp, vertex);
                         have = true;
                     }
@@ -81,8 +81,8 @@ public class Game {
         ArrayList<Light> solution = new ArrayList<Light>(sol);
         System.out.printf("\n%d moves to turn off all lights\n", move);
         for (int i = 0; i < move; i++) {
-            String tog = solution.get(i + 1).gettoggle(solution.get(i));
-            int po = solution.get(i + 1).getpo(solution.get(i));
+            String tog = solution.get(i).gettoggle(solution.get(i + 1));
+            int po = solution.get(i).getpo(solution.get(i + 1));
             int row = po / N;
             int col = po % N;
             System.out.printf("\n>>> Move %d : turn %-3s row %d, col %d\n", i + 1, tog, row, col);
