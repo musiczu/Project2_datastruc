@@ -4,8 +4,8 @@ import java.util.*;
 
 public class Light {
 
-    String present = "";
-    ArrayList<String> previous = new ArrayList<String>();
+    private String present = "";
+    private ArrayList<String> previous = new ArrayList<String>();
 
     public Light(String p) {
         this.present = p;
@@ -30,6 +30,18 @@ public class Light {
 
     public String getpresent() {
         return present;
+    }
+    public String getpresentconverse() {
+        char Temp[] = present.toCharArray();
+        for(int i = 0 ;i< Temp.length;i++){
+            if(Temp[i]=='2'){
+                Temp[i] = '0';
+            }if(Temp[i]=='3'){
+                Temp[i] = '1';
+            }            
+        }
+        String converse =String.valueOf(Temp);
+        return converse;
     }
 
     public String gettoggle(Light pre) {

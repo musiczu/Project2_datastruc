@@ -60,6 +60,18 @@ public class Game {
                 }
             }
             i++;
+            
+        }
+        int round = 1;
+        for (Light vertex : G.vertexSet()) {
+            
+                  System.out.printf("   %s   ",vertex.getpresentconverse());
+                  if(round == 7){
+                       System.out.println("");
+                       round = 0;
+                  }
+                  
+             round++;     
         }
         if (!G.containsVertex(finish)) {
             System.out.println("Cannot solve");
